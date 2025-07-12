@@ -2,6 +2,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <%
+
+Integer registerId = (Integer)session.getAttribute("id");
+if (registerId == null) {
+	response.sendRedirect("login.jsp");
+	return;
+}
+
 String billNumber = request.getParameter("bill_number");
 Connection con = null;
 PreparedStatement ps = null;

@@ -3,7 +3,7 @@
   <display-name>BillManagment</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>home.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.jsp</welcome-file>
@@ -54,5 +54,15 @@
   	<servlet-name>Payment</servlet-name>
   	<url-pattern>/payment</url-pattern>
   </servlet-mapping>
+  
+  <!-- <servlet>
+  	<servlet-name>UpdateBill</servlet-name>
+  	<servlet-class>com.billModule.UpdateBill</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>UpdateBill</servlet-name>
+  	<url-pattern>/updateBill</url-pattern>
+  </servlet-mapping> -->
   
 </web-app> 

@@ -1,52 +1,67 @@
-<%@ page import="java.sql.*, com.helper.Helper" %>
+<%@ page import="java.sql.*, com.helper.Helper"%>
 <%
-    String billNumberParam = request.getParameter("bill_number");
+Integer registerId = (Integer) session.getAttribute("id");
+if (registerId == null) {
+	response.sendRedirect("login.jsp");
+	return;
+}
 
-    if (billNumberParam != null && !billNumberParam.trim().isEmpty()) {
-        Connection con = null;
-        PreparedStatement pst = null;
+String billNumberParam = request.getParameter("bill_number");
 
-        try {
-            con = Helper.helper();
+if (billNumberParam != null && !billNumberParam.trim().isEmpty()) {
+	Connection con = null;
+	PreparedStatement pst = null;
 
-            String sql = "DELETE FROM bill WHERE bill_number = ?";
-            pst = con.prepareStatement(sql);
-            pst.setString(1, billNumberParam);
+	try {
+		con = Helper.helper();
 
-            int rowsDeleted = pst.executeUpdate();
+		String sql = "DELETE FROM bill WHERE bill_number = ?";
+		pst = con.prepareStatement(sql);
+		pst.setString(1, billNumberParam);
 
-            if (rowsDeleted > 0) {
+		int rowsDeleted = pst.executeUpdate();
+
+		if (rowsDeleted > 0) {
 %>
-                <script>
+<script>
                     alert("Bill deleted successfully!");
                     window.location.href = "desboard.jsp";
                 </script>
 <%
-            } else {
+} else {
 %>
-                <script>
+<script>
                     alert("Bill not found or could not be deleted.");
                     window.location.href = "desboard.jsp";
                 </script>
 <%
-            }
-        } catch (Exception e) {
+}
+} catch (Exception e) {
 %>
-            <script>
-                alert("Error occurred: <%= e.getMessage() %>");
-                window.location.href = "desboard.jsp";
-            </script>
+<script>
+                alert("Error occurred: <%=e.getMessage()%>
+	");
+	window.location.href = "desboard.jsp";
+</script>
 <%
-        } finally {
-            if (pst != null) try { pst.close(); } catch (Exception e) {}
-            if (con != null) try { con.close(); } catch (Exception e) {}
-        }
-    } else {
+} finally {
+if (pst != null)
+	try {
+		pst.close();
+	} catch (Exception e) {
+	}
+if (con != null)
+	try {
+		con.close();
+	} catch (Exception e) {
+	}
+}
+} else {
 %>
-        <script>
-            alert("Invalid bill number.");
-            window.location.href = "desboard.jsp";
-        </script>
+<script>
+	alert("Invalid bill number.");
+	window.location.href = "desboard.jsp";
+</script>
 <%
-    }
+}
 %>

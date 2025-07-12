@@ -15,15 +15,24 @@
         Connection con = Helper.helper();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT MAX(CAST(bill_number AS UNSIGNED)) AS last_bill_number FROM bill");
+
         if (rs.next()) {
-            newBillNumber = rs.getInt("last_bill_number") + 1;
+            int lastBill = rs.getInt("last_bill_number");
+            // Check if NULL
+            if (rs.wasNull()) {
+                newBillNumber = 100;
+            } else {
+                newBillNumber = lastBill + 1;
+            }
         }
+
         rs.close();
         stmt.close();
         con.close();
     } catch (Exception e) {
         newBillNumber = 100;
     }
+
 
     java.time.LocalDate today = java.time.LocalDate.now();
 %>

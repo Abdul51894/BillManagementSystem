@@ -28,7 +28,7 @@ public class BillModule extends HttpServlet {
             String bill_number = req.getParameter("bill_number");
             LocalDate bill_date = LocalDate.parse(req.getParameter("bill_date"));
 
-            // Get offset from form and calculate due date
+           
             String dueOffsetStr = req.getParameter("due_offset");
             LocalDate due_date = null;
 
